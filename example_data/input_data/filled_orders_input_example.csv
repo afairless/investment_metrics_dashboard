@@ -1,0 +1,26 @@
+order_submit_time|order_fill_cancel_time|symbol|buy_or_sell|buy_sell_unit|shares_num_submit|shares_num_fill|shares_num_not_fill|limit_price|fill_price|order_status|order_route|order_duration|order_id|account_id|simulator_or_real|originator_id|commission_cost|contract_expiration_date|tags|notes
+2020-01-07 09:36:58|2020-01-07 09:37:12|aaa|buy|-1|100|100|0|38|37.89|filled|route|duration|1205|43308A|real|5|0|-1|retail, swing trade|reports of strong Christmas sales
+2020-01-10 14:08:22|2020-01-10 14:08:28|aaa|sell|1|100|100|0|43|43.1|filled|route|duration|1205|43308A|real|5|0|-1|retail|closed well below today's high
+2020-01-07 09:39:14|2020-01-07 09:39:22|aaa 230117c40|buy to open|-1|4|4|0|0.8|0.85|filled|route|duration|1205|43308A|real|5|2|-1|retail, swing trade|reports of strong Christmas sales
+2020-01-10 14:10:03|2020-01-10 14:10:05|aaa 230117c40|sell to close|1|4|4|0|3|3.04|filled|route|duration|1205|43308A|real|5|2|-1|retail|
+2020-01-14 10:11:49|2020-01-14 10:11:49|bbbb|buy|-1|500|500|0|9.8|9.57|filled|route|duration|1205|43308A|real|5|0|-1|energy, intraday, gap down, reversal|gapped down from yesterday's close, probably oversold
+2020-01-14 15:01:03|2020-01-14 15:01:03|bbbb|sell|1|300|300|0|10.5|10.53|filled|route|duration|1205|43308A|real|5|0|-1||
+2020-01-14 15:50:33|2020-01-14 15:50:33|bbbb|sell|1|200|200|0|10|10.06|filled|route|duration|1205|43308A|real|5|0|-1||
+2020-01-15 08:24:06|2020-01-15 08:24:11|cccc|buy|-1|20|20|0|108|107.63|filled|route|duration|1205|43308A|real|5|0|-1|biotech, gap up|
+2020-01-15 09:31:25|2020-01-15 09:31:25|cccc|sell|1|20|20|0|100|101.95|filled|route|duration|1205|43308A|real|5|0|-1||fell sharply at open
+2020-01-15 10:03:39|2020-01-15 10:03:39|ddd|buy|-1|1000|979|21|5|5|partial fill|route|duration|1205|43308A|real|5|1|-1|scalp, breakout, energy|
+2020-01-15 10:03:55|2020-01-15 10:03:55|ddd|sell|1|500|500|0|5.32|5.22|filled|route|duration|1205|43308A|real|5|1|-1|scalp|
+2020-01-15 10:04:08|2020-01-15 10:04:08|ddd|sell|1|479|479|0|5.05|5.09|filled|route|duration|1205|43308A|real|5|1|-1|scalp|
+2020-01-15 13:00:00|2020-01-15 13:00:00|eeee|buy|-1|100|100|0|35|34.92|filled|route|duration|1205|43308A|simulator|5|1|-1|manufacturing, ascending channel|testing new strategy
+2020-01-15 15:30:00|2020-01-15 15:30:00|eeee|sell|1|100|100|0|37.5|37.77|filled|route|duration|1205|43308A|simulator|5|1|-1|manufacturing, ascending channel|testing new strategy
+2020-01-15 15:47:25|2020-01-15 15:47:25|eeee|sell short|1|50|50|0|40|40|filled|route|duration|1205|43308A|simulator|5|2|-1|manufacturing|
+2020-01-15 15:58:37|2020-01-15 15:58:39|eeee|buy to cover|-1|50|50|0|39.9|39.84|filled|route|duration|1205|43308A|simulator|5|2|-1|manufacturing|
+2020-01-16 09:03:03|2020-01-16 09:03:18|fff|buy|-1|300|300|0|22|21.64|filled|route|duration|1205|43308A|real|5|0|-1|retail|
+2020-01-16 12:32:02|2020-01-16 12:32:02|ggg|buy|-1|100|100|0|5.5|5.48|filled|route|duration|1205|43308A|real|5|0|-1|energy|steadily rising all morning
+2020-01-16 12:55:07|2020-01-16 12:55:07|ggg|sell|1|100|100|0|5.3|5.34|filled|route|duration|1205|43308A|real|5|0|-1|energy|doubled-topped, now seems to be trending down
+2020-01-16 15:55:47|2020-01-16 15:55:51|fff|sell|1|200|200|0|21.7|21.78|filled|route|duration|1205|43308A|real|5|0|-1|retail, intraday|
+2020-01-17 08:25:19|2020-01-17 08:25:20|fff|sell|1|100|100|0|22|22.13|filled|route|duration|1205|43308A|real|5|0|-1|retail, swing trade|
+2020-01-20 15:05:44|2020-01-20 15:05:44|hh 230131p100|buy to open|-1|5|5|0|0.4|0.36|filled|route|duration|1205|43308A|real|5|2.5|-1|tech|lost major contract
+2020-01-22 09:41:33|2020-01-22 09:41:34|hh 230131p100|sell to close|1|5|5|0|0.7|0.72|filled|route|duration|1205|43308A|real|5|2.5|-1|tech|
+2020-01-23 11:47:21|2020-01-23 11:47:21|iii 230131c250|buy to open|-1|10|10|0|0.65|0.61|filled|route|duration|1205|43308A|real|5|4|-1|biotech |
+2020-01-24 09:31:55|2020-01-24 09:31:57|iii 230131c250|sell to close|1|10|10|0|0.4|0.41|filled|route|duration|1205|43308A|real|5|4|-1|biotech |
