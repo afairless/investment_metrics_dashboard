@@ -55,7 +55,9 @@ python -m src.app.app
 Then point your web browser at:
 
 http://127.0.0.1:8050/
+
 OR
+
 http://0.0.0.0:8050/
 
 
@@ -74,7 +76,9 @@ python -m src.app.app
 Then point your web browser at:
 
 http://127.0.0.1:8050/
+
 OR
+
 http://0.0.0.0:8050/
 
 

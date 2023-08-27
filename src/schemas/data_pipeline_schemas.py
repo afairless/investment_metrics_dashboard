@@ -16,7 +16,7 @@ class LoadedTransformedBrokerOrdersForDashboard(pdr.SchemaModel):
         nullable=True)
 
     symbol: pdr_Series[str] = pdr.Field(
-        str_length={'min_value': 2, 'max_value': 17}, nullable=False)
+        str_length={'min_value': 1, 'max_value': 17}, nullable=False)
 
     price_spread: Optional[pdr_Series[float]] = pdr.Field(ge=0)
 
@@ -78,7 +78,7 @@ class FilledOrdersByPositionChange(pdr.SchemaModel):
     positions_idx: pdr_Series[int] = pdr.Field(nullable=False)
 
     symbol: pdr_Series[str] = pdr.Field(
-        str_length={'min_value': 2, 'max_value': 17}, nullable=False)
+        str_length={'min_value': 1, 'max_value': 17}, nullable=False)
 
     simulator_or_real: pdr_Series[str] = pdr.Field(
         isin=['simulator', 'real'], nullable=False)
@@ -193,7 +193,7 @@ class FilledOrdersByOngoingPosition(pdr.SchemaModel):
     order_fill_cancel_time: pdr_Series[pdr.dtypes.DateTime]
 
     symbol: pdr_Series[str] = pdr.Field(
-        str_length={'min_value': 2, 'max_value': 17}, nullable=False)
+        str_length={'min_value': 1, 'max_value': 17}, nullable=False)
 
     num_buy_sell_orders: pdr_Series[int] = pdr.Field(
         in_range={'min_value': 2, 'max_value': 500}, nullable=False)
