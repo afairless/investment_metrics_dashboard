@@ -34,21 +34,19 @@ USER appuser
 #   https://stackoverflow.com/questions/53835198/integrating-python-poetry-with-docker
 #   Integrating Python Poetry with Docker
 ENV PYTHONFAULTHANDLER=1 \
-    PYTHONHASHSEED=random \
-    # "Seems to speed things up"
-    #   https://pmac.io/2019/02/multi-stage-dockerfile-and-python-virtualenv/
-    #   Multi-Stage Dockerfiles and Python Virtualenvs
-    #   Mon, Feb 18, 2019
-    PYTHONUNBUFFERED=1 \
-    PIP_DEFAULT_TIMEOUT=100 \
-    PIP_DISABLE_PIP_VERSION_CHECK=1 \
-    PIP_NO_CACHE_DIR=1
+  PYTHONHASHSEED=random \
+  # "Seems to speed things up"
+  #   https://pmac.io/2019/02/multi-stage-dockerfile-and-python-virtualenv/
+  #   Multi-Stage Dockerfiles and Python Virtualenvs
+  #   Mon, Feb 18, 2019
+  PYTHONUNBUFFERED=1 \
+  PIP_DEFAULT_TIMEOUT=100 \
+  PIP_DISABLE_PIP_VERSION_CHECK=1 \
+  PIP_NO_CACHE_DIR=1
 
-
-WORKDIR /src
 
 # Poetry dependencies were exported to 'requirements.txt' 
-COPY src/requirements.txt ./
+COPY requirements.txt ./
 RUN pip install --no-cache-dir --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 COPY . . 
