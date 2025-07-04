@@ -2038,18 +2038,20 @@ def test_price_percentage_change_by_position_chronologically_01():
     result_data = result_dict['data']
 
     assert np.isclose(
-        result_data[0]['y'], 
+        bdata_convert(result_data[0]['y']), 
         [(0.1/8.15) * 100, 
          (-1/23) * 100, 
          (-50/60) * 100], atol=1e-02).all()
 
     assert np.isclose(
-        result_data[1]['y'], 
+        bdata_convert(result_data[1]['y']), 
         [(0.1/8.15) * 100, 
          (-1/23) * 100, 
          (-50/60) * 100], atol=1e-02).all()
 
-    assert np.isclose(result_data[2]['y'], [(0.1/8.15) * 100], atol=1e-02).all()
+    assert np.isclose(
+        bdata_convert(result_data[2]['y']), 
+        [(0.1/8.15) * 100], atol=1e-02).all()
 
 
 def test_price_percentage_change_by_position_chronologically_02():
@@ -2077,18 +2079,20 @@ def test_price_percentage_change_by_position_chronologically_02():
     result_data = result_dict['data']
 
     assert np.isclose(
-        result_data[0]['y'], 
+        bdata_convert(result_data[0]['y']), 
         [(0.1/8.15) * 100, 
          (-1/23) * 100, 
          (-50/60) * 100], atol=1e-02).all()
 
     assert np.isclose(
-        result_data[1]['y'], 
+        bdata_convert(result_data[1]['y']), 
         [(0.1/8.15) * 100, 
          (-1/23) * 100, 
          (-50/60) * 100], atol=1e-02).all()
 
-    assert np.isclose(result_data[2]['y'], [(0.1/8.15) * 100], atol=1e-02).all()
+    assert np.isclose(
+        bdata_convert(result_data[2]['y']), 
+        [(0.1/8.15) * 100], atol=1e-02).all()
 
 
 def test_position_hold_times_01():
@@ -2211,11 +2215,11 @@ def test_position_volumes_02():
     result_dict = result.to_dict()
     result_data = result_dict['data']
 
-    assert (result_data[0]['y'] == [100, 2000, 50]).all()
-    assert (result_data[1]['y'] == [2000]).all()
-    assert (result_data[2]['y'] == [100]).all()
-    assert (result_data[3]['y'] == [2000]).all()
-    assert (result_data[4]['y'] == [100, 50]).all()
+    assert (bdata_convert(result_data[0]['y']) == [100, 2000, 50]).all()
+    assert (bdata_convert(result_data[1]['y']) == [2000]).all()
+    assert (bdata_convert(result_data[2]['y']) == [100]).all()
+    assert (bdata_convert(result_data[3]['y']) == [2000]).all()
+    assert (bdata_convert(result_data[4]['y']) == [100, 50]).all()
 
 
 def test_position_volumes_03():
@@ -2238,11 +2242,11 @@ def test_position_volumes_03():
     result_dict = result.to_dict()
     result_data = result_dict['data']
 
-    assert (result_data[0]['y'] == [100, 2000, 50]).all()
-    assert (result_data[1]['y'] == [2000]).all()
-    assert (result_data[2]['y'] == [100]).all()
-    assert (result_data[3]['y'] == [2000]).all()
-    assert (result_data[4]['y'] == [100, 50]).all()
+    assert (bdata_convert(result_data[0]['y']) == [100, 2000, 50]).all()
+    assert (bdata_convert(result_data[1]['y']) == [2000]).all()
+    assert (bdata_convert(result_data[2]['y']) == [100]).all()
+    assert (bdata_convert(result_data[3]['y']) == [2000]).all()
+    assert (bdata_convert(result_data[4]['y']) == [100, 50]).all()
 
 
 def test_position_commissions():
@@ -2264,11 +2268,11 @@ def test_position_commissions():
     result_dict = result.to_dict()
     result_data = result_dict['data']
 
-    assert (result_data[0]['y'] == [20, 20, 10]).all()
-    assert (result_data[1]['y'] == [20]).all()
-    assert (result_data[2]['y'] == [20]).all()
-    assert (result_data[3]['y'] == [20]).all()
-    assert (result_data[4]['y'] == [20, 10]).all()
+    assert (bdata_convert(result_data[0]['y']) == [20, 20, 10]).all()
+    assert (bdata_convert(result_data[1]['y']) == [20]).all()
+    assert (bdata_convert(result_data[2]['y']) == [20]).all()
+    assert (bdata_convert(result_data[3]['y']) == [20]).all()
+    assert (bdata_convert(result_data[4]['y']) == [20, 10]).all()
 
 
 
