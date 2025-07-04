@@ -1,5 +1,5 @@
  
-import pandera as pdr
+import pandera.pandas as pdr
 from pandera.typing import Series as pdr_Series
 from typing import Optional, Any
  
@@ -7,7 +7,7 @@ from typing import Optional, Any
 # SET DATAFRAME SCHEMAS
 ##############################
 
-class LoadedTransformedBrokerOrdersForDashboard(pdr.SchemaModel):
+class LoadedTransformedBrokerOrdersForDashboard(pdr.DataFrameModel):
 
     # is there a way to check number of rows in dataframe?
 
@@ -73,7 +73,7 @@ class FilledOrdersForDashboard(BrokerOrdersTagsNotesForDashboard):
         coerce = True
 
 
-class FilledOrdersByPositionChange(pdr.SchemaModel):
+class FilledOrdersByPositionChange(pdr.DataFrameModel):
 
     positions_idx: pdr_Series[int] = pdr.Field(nullable=False)
 
@@ -185,7 +185,7 @@ class FilledOrdersByPositionChange(pdr.SchemaModel):
         coerce = True
 
 
-class FilledOrdersByOngoingPosition(pdr.SchemaModel):
+class FilledOrdersByOngoingPosition(pdr.DataFrameModel):
 
     positions_idx: pdr_Series[int] = pdr.Field(nullable=False)
 
@@ -234,7 +234,7 @@ class FilledOrdersByOngoingPosition(pdr.SchemaModel):
         coerce = True
 
 
-class FilledOrdersBySymbolDay(pdr.SchemaModel):
+class FilledOrdersBySymbolDay(pdr.DataFrameModel):
 
     positions_idx: pdr_Series[str] = pdr.Field(nullable=False)
     submit_date: pdr_Series[pdr.dtypes.DateTime]
@@ -282,7 +282,7 @@ class FilledOrdersBySymbolDay(pdr.SchemaModel):
         coerce = True
 
 
-class PriceWeightedByShareNumberResult(pdr.SchemaModel):
+class PriceWeightedByShareNumberResult(pdr.DataFrameModel):
 
     positions_idx: pdr_Series[int] = pdr.Field(nullable=False)
     weighted_average_price: pdr_Series[float] = pdr.Field(nullable=False)

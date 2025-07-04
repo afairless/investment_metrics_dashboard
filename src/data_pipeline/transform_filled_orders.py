@@ -13,7 +13,7 @@ from sqlalchemy import create_engine
 import pyarrow as pa
 import pyarrow.parquet as pq
 
-import pandera as pdr
+import pandera.pandas as pdr
 from pandera.typing import DataFrame as pdr_DataFrame
 
 from ..schemas.data_pipeline_schemas import (
@@ -430,8 +430,9 @@ def convert_to_filled_orders_by_position_change(
 
     df = (
         filled_orders.groupby('positions_idx')
-        .apply(match_buy_sell_orders)
+        .apply(match_buy_sell_orders, include_groups=True)
         .reset_index(drop=True))
+
     assert isinstance(df, pd.DataFrame)
 
     df['match_shares_num_fill_buy'] = df['match_shares_num_fill_buy'].astype(int)

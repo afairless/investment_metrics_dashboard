@@ -1,5 +1,5 @@
  
-import pandera as pdr
+import pandera.pandas as pdr
 from pandera.typing import Series as pdr_Series
 
 from ..schemas.data_pipeline_schemas import (

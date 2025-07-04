@@ -11,7 +11,7 @@ from dataclasses import dataclass, fields
 from math import log, ceil, floor
 from datetime import date
 
-import pandera as pdr
+import pandera.pandas as pdr
 from pandera.typing import DataFrame as pdr_DataFrame
 
 import pyarrow.parquet as pq
@@ -213,7 +213,8 @@ def convert_orders_json_to_df(
         df = pd.DataFrame()
     else:
         df = pd.read_json(
-            df_json, orient='split', date_unit='ms', convert_dates=False)
+            io.StringIO(df_json), orient='split', date_unit='ms', 
+            convert_dates=False)
     assert isinstance(df, pd.DataFrame)
 
     if convert_dates:
@@ -794,7 +795,7 @@ def convert_filled_orders_json_to_df(
     Enforce defined schema when converting from JSON to Pandas DataFrame
     """
 
-    df = pd.read_json(df_json, orient='split', date_unit='ms')
+    df = pd.read_json(io.StringIO(df_json), orient='split', date_unit='ms')
     assert isinstance(df, pd.DataFrame)
 
     return df
@@ -807,7 +808,7 @@ def convert_orders_position_change_json_to_df(
     Enforce defined schema when converting from JSON to Pandas DataFrame
     """
 
-    df = pd.read_json(df_json, orient='split', date_unit='ms')
+    df = pd.read_json(io.StringIO(df_json), orient='split', date_unit='ms')
     assert isinstance(df, pd.DataFrame)
 
     return df
@@ -820,7 +821,7 @@ def convert_orders_ongoing_position_json_to_df(
     Enforce defined schema when converting from JSON to Pandas DataFrame
     """
 
-    df = pd.read_json(df_json, orient='split', date_unit='ms')
+    df = pd.read_json(io.StringIO(df_json), orient='split', date_unit='ms')
     assert isinstance(df, pd.DataFrame)
 
     return df
@@ -833,7 +834,7 @@ def convert_orders_symbol_day_json_to_df(
     Enforce defined schema when converting from JSON to Pandas DataFrame
     """
 
-    df = pd.read_json(df_json, orient='split', date_unit='ms')
+    df = pd.read_json(io.StringIO(df_json), orient='split', date_unit='ms')
     assert isinstance(df, pd.DataFrame)
 
     return df
@@ -1509,7 +1510,7 @@ def profit_table(df_json: str, table_mask: str) -> go.Figure:
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
     stats = calculate_trade_statistics(df.loc[mask, :])
 
 
@@ -1559,7 +1560,7 @@ def orders_table(df_json: str, table_mask: str) -> go.Figure:
     ################################################## 
 
     df = convert_orders_json_to_df(df_json)
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
 
     # sum commission costs that are divided between buy and sell orders
@@ -1696,7 +1697,7 @@ def number_of_positions_by_date_plot(
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
     df_mask = df.loc[mask, 'max_date'].dt.date.copy()
     plot_df = df_mask.value_counts().reset_index()
 
@@ -1740,7 +1741,7 @@ def spent_outflow_by_date_plot(df_json: str, table_mask: str) -> go.Figure:
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     colnames = ['spent_outflow', 'spent_outflow_commission', 'max_date']
     df1 = df.loc[mask, colnames].copy()
@@ -1809,7 +1810,7 @@ def number_of_positions_by_gain_loss_plot(
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     if sum(mask) < 1:
         return go.Figure(layout={
@@ -1987,7 +1988,7 @@ class time_changes:
 
         # round Timedeltas for display
         for field in fields(self):
-            setattr( self, field.name, getattr(self, field.name).round('1S') )
+            setattr( self, field.name, getattr(self, field.name).round('1s') )
 
 
 def get_row_indices_for_date_start(series: pd.Series) -> np.ndarray:
@@ -2079,7 +2080,7 @@ def balance_change_by_position_chronologically(
 
     #mask = [True] * len(df)
     #mask = [False] * len(df)
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     colnames = [
         'balance_change', 'balance_change_commission', 'max_date', 'symbol']
@@ -2409,7 +2410,7 @@ def cumulative_balance_change_by_position_chronologically(
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     if sum(mask) < 1:
         return go.Figure(layout={
@@ -2589,7 +2590,7 @@ def cumulative_price_change_per_share_by_position_chronologically(
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     if sum(mask) < 1:
         return go.Figure(layout={
@@ -2744,7 +2745,7 @@ def price_change_per_share_by_position_chronologically(
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     colnames = [
         'fill_price_change', 'max_date', 'symbol', 'balance_change', 
@@ -2994,7 +2995,7 @@ def price_percentage_change_by_position_chronologically(
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     # column names for Orders Position Change table
     colnames01 = [
@@ -3228,7 +3229,7 @@ def position_hold_times(df_json: str, table_mask: str) -> go.Figure:
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     if 'order_submit_time_buy' in df.columns:
         order_submit_time_colname = 'order_submit_time_buy'
@@ -3334,7 +3335,7 @@ def position_volumes(df_json: str, table_mask: str) -> go.Figure:
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     if 'match_shares_num_fill' in df.columns:
         shares_num_fill_colname = 'match_shares_num_fill'
@@ -3436,7 +3437,7 @@ def position_commissions(df_json: str, table_mask: str) -> go.Figure:
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     colnames = ['balance_change', 'balance_change_commission']
     plot_df = df.loc[mask, colnames].copy()
@@ -3534,7 +3535,7 @@ def balance_change_by_day(
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     colnames = [
         'balance_change', 'balance_change_commission', 'max_date', 'symbol']
@@ -3859,7 +3860,7 @@ def price_change_per_share_by_day(
 
     df = convert_orders_json_to_df(df_json)
 
-    mask = pd.read_json(table_mask, typ='series')
+    mask = pd.read_json(io.StringIO(table_mask), typ='series')
 
     colnames = [
         'fill_price_change', 'max_date', 'symbol', 'balance_change', 
@@ -4080,8 +4081,8 @@ def price_change_per_share_by_day(
 
 if __name__ == '__main__':
     # for development
-    #app.run_server(debug=True, port=8050, use_reloader=True)
-    #app.run_server(port=8888, debug=True) 
+    #app.run(debug=True, port=8050, use_reloader=True)
+    #app.run(port=8888, debug=True) 
 
     # for production
-    app.run_server(host='0.0.0.0', port=8050, debug=True)
+    app.run(host='0.0.0.0', port=8050, debug=True)
