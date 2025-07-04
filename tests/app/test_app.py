@@ -1731,6 +1731,14 @@ def test_spent_outflow_by_date_plot():
     assert result_values[1]['x'][1] == date(2021, 1,  7)
     assert result_values[1]['x'][2] == date(2021, 5,  3)
 
+    assert bdata_convert(result_values[0]['y'])[0] == 20_000
+    assert bdata_convert(result_values[0]['y'])[1] == 100
+    assert bdata_convert(result_values[0]['y'])[2] == 3000
+
+    assert bdata_convert(result_values[1]['y'])[0] == 100
+    assert bdata_convert(result_values[1]['y'])[1] == 0
+    assert bdata_convert(result_values[1]['y'])[2] == 20
+
 
 def test_number_of_positions_by_gain_loss_plot():
     """
@@ -1866,14 +1874,13 @@ def test_balance_change_by_position_chronologically():
 
     result = balance_change_by_position_chronologically(json_input, table_mask)
     result_dict = result.to_dict()
-    # result_data = result_dict['data']
+    result_data = result_dict['data']
     result_layout = result_dict['layout']
 
-    # 'result' no longer passes through original inputs
-    #assert (result_data[0]['y'] == [-120, 120,   0]).all()
-    #assert (result_data[1]['y'] == [-140, 100, -10]).all()
-    #assert (result_data[2]['y'] == [-120, 120,   0]).all()
-    #assert (result_data[5]['y'] == [-140, 100, -10]).all()
+    assert (bdata_convert(result_data[0]['y']) == [-120, 120,   0]).all()
+    assert (bdata_convert(result_data[1]['y']) == [-140, 100, -10]).all()
+    assert (bdata_convert(result_data[2]['y']) == [-120, 120,   0]).all()
+    assert (bdata_convert(result_data[5]['y']) == [-140, 100, -10]).all()
     assert result_layout['yaxis']['range'][0] == -140
 
     assert (
@@ -1904,10 +1911,9 @@ def test_cumulative_balance_change_by_position_chronologically():
     result_dict = result.to_dict()
     result_data = result_dict['data']
 
-    # 'result' no longer passes through original inputs
-    # assert (result_data[0]['y'] == [0,   -120,   0,   0]).all()
-    # assert (result_data[1]['y'] == [0,   -140, -40, -50]).all()
-    # assert (result_data[2]['y'] == [0,     20,  40,  50]).all()
+    assert (bdata_convert(result_data[0]['y']) == [0, -120,   0,   0]).all()
+    assert (bdata_convert(result_data[1]['y']) == [0, -140, -40, -50]).all()
+    assert (bdata_convert(result_data[2]['y']) == [0,   20,  40,  50]).all()
     assert (result_data[3]['y'] == [120,  100, 120, 150])
 
     assert (
@@ -1939,10 +1945,8 @@ def test_price_change_per_share_by_position_chronologically():
     result_dict = result.to_dict()
     result_data = result_dict['data']
 
-    bdata = result_data[0]['y']
-    assert (bdata_convert(bdata) == [-0.5, 10, 0]).all()
-    bdata = result_data[1]['y']
-    assert (bdata_convert(bdata) == [-0.5, 10, 0]).all()
+    assert (bdata_convert(result_data[0]['y']) == [-0.5, 10, 0]).all()
+    assert (bdata_convert(result_data[1]['y']) == [-0.5, 10, 0]).all()
 
 
 def test_calculate_geometric_mean_01():
