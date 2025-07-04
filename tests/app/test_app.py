@@ -1,5 +1,6 @@
  
-from typing import Callable, Sequence
+import base64
+from typing import Callable, Any, Sequence
 from datetime import date
 import numpy as np
 import pandas as pd
@@ -59,6 +60,27 @@ from ...src.app.app import (
 from ...src.app.sidebar import slider_style01
 
 date_colnames = pd.Series(date_colnames).unique().tolist()
+
+
+##################################################
+# HELPER FUNCTION
+##################################################
+
+def bdata_convert(bdata_dict: dict[str, str]):
+    """ 
+    Convert base64-encoded binary data to a Numpy array
+    Plotly Dash uses a compact binary encoding for array data in JSON, 
+        especially for large or typed arrays. The 'bdata' key contains a 
+        base64-encoded binary representation of the array, and 'dtype' 
+        specifies the NumPy dtype.
+    """ 
+
+    assert 'dtype' in bdata_dict, "Missing 'dtype' in bdata_dict"
+    assert 'bdata' in bdata_dict, "Missing 'bdata' in bdata_dict"
+
+    dtype = np.dtype(bdata_dict['dtype'])
+    bdata = base64.b64decode(bdata_dict['bdata'])
+    return np.frombuffer(bdata, dtype=dtype)
 
 
 ##################################################
@@ -1917,8 +1939,10 @@ def test_price_change_per_share_by_position_chronologically():
     result_dict = result.to_dict()
     result_data = result_dict['data']
 
-    assert (result_data[0]['y'] == [-0.5, 10, 0]).all()
-    assert (result_data[1]['y'] == [-0.5, 10, 0]).all()
+    bdata = result_data[0]['y']
+    assert (bdata_convert(bdata) == [-0.5, 10, 0]).all()
+    bdata = result_data[1]['y']
+    assert (bdata_convert(bdata) == [-0.5, 10, 0]).all()
 
 
 def test_calculate_geometric_mean_01():
