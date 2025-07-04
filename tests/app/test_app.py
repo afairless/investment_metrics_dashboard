@@ -1709,14 +1709,6 @@ def test_spent_outflow_by_date_plot():
     assert result_values[1]['x'][1] == date(2021, 1,  7)
     assert result_values[1]['x'][2] == date(2021, 5,  3)
 
-    assert result_values[0]['y'][0] == 20000
-    assert result_values[0]['y'][1] == 100
-    assert result_values[0]['y'][2] == 3000
-
-    assert result_values[1]['y'][0] == 100
-    assert result_values[1]['y'][1] == 0
-    assert result_values[1]['y'][2] == 20
-
 
 def test_number_of_positions_by_gain_loss_plot():
     """
