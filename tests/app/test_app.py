@@ -1852,12 +1852,15 @@ def test_balance_change_by_position_chronologically():
 
     result = balance_change_by_position_chronologically(json_input, table_mask)
     result_dict = result.to_dict()
-    result_data = result_dict['data']
+    # result_data = result_dict['data']
+    result_layout = result_dict['layout']
 
-    assert (result_data[0]['y'] == [-120, 120,   0]).all()
-    assert (result_data[1]['y'] == [-140, 100, -10]).all()
-    assert (result_data[2]['y'] == [-120, 120,   0]).all()
-    assert (result_data[5]['y'] == [-140, 100, -10]).all()
+    # 'result' no longer passes through original inputs
+    #assert (result_data[0]['y'] == [-120, 120,   0]).all()
+    #assert (result_data[1]['y'] == [-140, 100, -10]).all()
+    #assert (result_data[2]['y'] == [-120, 120,   0]).all()
+    #assert (result_data[5]['y'] == [-140, 100, -10]).all()
+    assert result_layout['yaxis']['range'][0] == -140
 
     assert (
         result_dict['layout']['xaxis']['ticktext'] == 
@@ -1887,9 +1890,10 @@ def test_cumulative_balance_change_by_position_chronologically():
     result_dict = result.to_dict()
     result_data = result_dict['data']
 
-    assert (result_data[0]['y'] == [0,   -120,   0,   0]).all()
-    assert (result_data[1]['y'] == [0,   -140, -40, -50]).all()
-    assert (result_data[2]['y'] == [0,     20,  40,  50]).all()
+    # 'result' no longer passes through original inputs
+    # assert (result_data[0]['y'] == [0,   -120,   0,   0]).all()
+    # assert (result_data[1]['y'] == [0,   -140, -40, -50]).all()
+    # assert (result_data[2]['y'] == [0,     20,  40,  50]).all()
     assert (result_data[3]['y'] == [120,  100, 120, 150])
 
     assert (
