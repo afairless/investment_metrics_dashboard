@@ -602,9 +602,13 @@ def market_time_of_day_categories(
 
     if df_json == empty_df_json:
         return [{'': ''}], pd.Index([])
+        # return [{'label': '', 'value': ''}], pd.Index([])
 
     df = convert_orders_json_to_df(df_json, False)
     
+    #if np.isnan(df.iloc[0,0]):
+    #    return [{'label': '', 'value': ''}], pd.Index([])
+
     # 'try... except' is inelegant; might should replace with a type check
     try:
         value = df['max_date_market_time'].cat.categories
