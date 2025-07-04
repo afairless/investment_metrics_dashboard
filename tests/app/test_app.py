@@ -1551,7 +1551,12 @@ def test_calculate_trade_statistics_01():
     df = pd.DataFrame()
     result = calculate_trade_statistics(df)
 
-    assert result == 4 * [statistic_description()]
+    assert isinstance(result, list)
+    assert len(result) == 4
+    for e in result:
+        assert isinstance(e, statistic_description)
+        assert e.description == ''
+        assert np.isnan(e.statistic)
 
 
 def test_calculate_trade_statistics_01b():
