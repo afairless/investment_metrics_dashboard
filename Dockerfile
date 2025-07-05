@@ -18,7 +18,11 @@ COPY . .
 RUN chown -R appuser:appuser /app
 USER appuser
 
-
+# Instead of removing the cache, one can use a multi-stage build; see:
+#   https://tech.quantco.com/blog/pixi-production
+#   Shipping conda environments to production using pixi
+#   Pavel Zwerschke
+#   Thursday, July 11, 2024
 RUN pixi install --locked --environment prod && rm -rf ~/.cache/rattler
 
 EXPOSE 8050
