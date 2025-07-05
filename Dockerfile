@@ -1,5 +1,5 @@
 
-FROM ghcr.io/prefix-dev/pixi:0.49.0 AS build
+FROM ghcr.io/prefix-dev/pixi:0.49.0-bullseye-slim AS build
 
 # Get updates and security fixes as root user before switching to non-root user
 #   https://pythonspeed.com/articles/security-updates-in-docker/
