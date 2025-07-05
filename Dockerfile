@@ -19,7 +19,7 @@ RUN chown -R appuser:appuser /app
 USER appuser
 
 
-RUN pixi install --locked --environment prod
+RUN pixi install --locked --environment prod && rm -rf ~/.cache/rattler
 
 EXPOSE 8050
 ENTRYPOINT ["pixi", "run", "--"]
