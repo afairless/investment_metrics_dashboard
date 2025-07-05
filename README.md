@@ -37,50 +37,31 @@ In the commands above, you may substitute a name of your own choosing for ```doc
 
 Then point your web browser at:
 
+```
 http://127.0.0.1:8050/
+```
 
+## Run with Pixi
 
-## Run with Poetry
-
-From the top-level directory, you can [run these commands](https://python-poetry.org/docs/basic-usage/):
+From the top-level directory, you can [run these commands](https://github.com/prefix-dev/pixi):
 
 ```code
-poetry install
-
-poetry shell
+pixi shell
 
 python -m src.app.app
 ```
 
 Then point your web browser at:
 
+```
 http://127.0.0.1:8050/
-
-OR
-
-http://0.0.0.0:8050/
-
-
-## Run with Anaconda
-
-From the top-level directory, you can [run these commands](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
-
-```code
-conda env create -f environment.yml
-
-conda activate dashboard_pipeline10
-
-python -m src.app.app
 ```
 
-Then point your web browser at:
-
-http://127.0.0.1:8050/
-
 OR
 
+```
 http://0.0.0.0:8050/
-
+```
 
 ## Upload Data
 
